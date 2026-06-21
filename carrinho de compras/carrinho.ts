@@ -24,12 +24,18 @@ function adicionarItem(nomeProd: string, precoProd: number, qtd: number) {
 }
 
 // função para calcular o valor total do carrinho usando .reduce()
-function calcularTotal(): number {
-    const total = carrinho.reduce((ac, item) => {
+function calcularTotal(cupom?: string): number { // parâmetro cupom pode ser string ou undefined
+    const totalBruto = carrinho.reduce((ac, item) => {
         return ac + (item.preco * item.quantidade)
     }, 0) // esse '0' é o valor inicial do acumulador (igual fazer 'int totoal = 0' em C)
 
-    return total;
+    if (cupom === "VALE10") { 
+        console.log(`[Coupons] Cupom VALE10 aplicado! Você ganhou 10% de desconto.`);
+        // .ultiplicar por 0.90 é o jeito mais rápido de tirar 10% do valor
+        return totalBruto * 0.90; 
+    }
+
+    return totalBruto;
 }
 
 
@@ -43,7 +49,7 @@ function exibirCarrinho(): void {
     }) // fim do loop
 
     console.log("------------------------------");
-    console.log(`TOTAL DA COMPRA: R$ ${calcularTotal()}`);
+    console.log(`TOTAL DA COMPRA: R$ ${calcularTotal("VALE10")}`);
     console.log("==========================\n");
 }
 
