@@ -1,7 +1,7 @@
 function removerDuplicados(arr: number[]): number[] {
 
     if (arr.length <= 0) return [];
-    const arr2 = []
+    const arr2: number[] = []
 
     arr.forEach(f => {
         if (!arr2.includes(f)) {

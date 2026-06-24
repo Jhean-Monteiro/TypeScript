@@ -12,15 +12,15 @@ function quickSort(arr: number[]): number[] {
 
     // passa por todo o array, menos o pivo que é o último
     for (let i = 0; i < arr.length-1; i++) {
-        if (arr[i] < pivo) {
-            menores.push(arr[i]);
+        if (arr[i]! < pivo!) {
+            menores.push(arr[i]!);
         } else {
-            maiores.push(arr[i]);
+            maiores.push(arr[i]!);
         }
     }
 
     // junta tudo recursivamente.
-    return [...quickSort(menores), pivo, ...quickSort(maiores)]
+    return [...quickSort(menores)!, pivo!, ...quickSort(maiores)!]
 }
 
 
