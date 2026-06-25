@@ -1,36 +1,3 @@
-/*
-**Desafio 11 — Intersection type**
-
-Você já conhece union (`|`) que significa "ou um ou outro". Agora o oposto: intersection (`&`) que significa "os dois ao mesmo tempo".
-
-```typescript
-type A = { nome: string }
-type B = { idade: number }
-
-type AB = A & B // → { nome: string, idade: number }
-```
-
-Útil pra combinar tipos sem repetir código.
-
----
-
-O desafio: crie três tipos separados:
-
-- `Identificavel` → `{ id: number }`
-- `Nomeavel` → `{ nome: string }`
-- `Timestampado` → `{ criadoEm: string }`
-
-Combine os três em um tipo `Entidade` usando `&`.
-
-Depois crie uma função `exibirEntidade` que recebe uma `Entidade` e retorna:
-
-```
-"[42] Jhean - criado em 2024-01-15"
-```
-
-E crie pelo menos dois objetos do tipo `Entidade` pra testar.
-*/
-
 type Identificavel = {id: number}
 type Nomeavel = {nome:string}
 type Timestampado = {criadoEm: string}
