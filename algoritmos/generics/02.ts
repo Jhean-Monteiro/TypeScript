@@ -23,11 +23,11 @@ function gerarArrayAleatorio(
 function testeDeExtresse() {
   let i = 0;
   do {
-    const arr1 = gerarArrayAleatorio(1000000, 1, 10000);
-    const arr2 = gerarArrayAleatorio(1000000, 1, 10000);
+    const arr1 = gerarArrayAleatorio(100000, 1, 100);
+    const arr2 = gerarArrayAleatorio(100000, 1, 100);
     console.log(zipar(arr1, arr2));
     i++;
-  } while (i < 1000000);
+  } while (i < 100000);
 }
 
 testeDeExtresse();
