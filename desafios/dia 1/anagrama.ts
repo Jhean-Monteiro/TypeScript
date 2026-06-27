@@ -1,9 +1,8 @@
-import { isDeepStrictEqual } from "node:util"
-
 type An = Record<string, number>
 
-
 function isAnagrama(str1: string, str2: string): boolean {
+    str1 = str1.toLocaleLowerCase()
+    str2 = str2.toLocaleLowerCase()
     let arr1 = str1.split("")
     let arr2 = str2.split("")
 
@@ -26,13 +25,16 @@ function isAnagrama(str1: string, str2: string): boolean {
         }
     })
 
+    for (const letra in An1) {
+        if (An1[letra] !== An2[letra]) return false
+    }
+
     
-    const bol = isDeepStrictEqual(An2, An1)
-    return bol;
-    
+    return true
 }
 
 console.log(isAnagrama("listen", "silent")) 
 console.log(isAnagrama("hello", "world"))   
 console.log(isAnagrama("Arara", "arara"))
 console.log(isAnagrama("cinema", "iceman"))
+console.log(isAnagrama("laenard", "adelran"))
