@@ -41,3 +41,5 @@ fizzBuzz(5);
 fizzBuzz(15);
 fizzBuzz(2);
 fizzBuzz(30);
+
+export {}

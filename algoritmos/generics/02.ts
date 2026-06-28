@@ -36,3 +36,5 @@ testeDeExtresse();
 testeDeExtresse();
 testeDeExtresse();
 testeDeExtresse();
+
+export {}

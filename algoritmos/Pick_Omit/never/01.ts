@@ -32,15 +32,19 @@ function desafio() {
         switch (forma2) {
             case "circulo":
             console.log(descreverForma("circulo"));
+            break;
 
             case "quadrado":
             console.log(descreverForma("quadrado"));
+            break;
 
             case "triangulo":
             console.log(descreverForma("triangulo"));
+            break;
 
             case "pentagono":
             console.log(descreverForma("pentagono"));
+            break;
         }
 
         j++
@@ -52,3 +56,5 @@ function desafio() {
 }
 
 desafio()
+
+export {}
