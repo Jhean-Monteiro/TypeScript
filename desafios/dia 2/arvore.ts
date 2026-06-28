@@ -25,6 +25,20 @@ function contarNos(no: No): number {
     return contador
 }
 
+function nivelMaisFundo(no:No): number {
+    if (!no.filhos || no.filhos.length === 0) return 1
+
+    let maxFilho = 0
+    for (const filho of no.filhos) {
+        const profundidadeFilho = nivelMaisFundo(filho)
+        if (profundidadeFilho > maxFilho) {
+            maxFilho = profundidadeFilho
+        }
+    }
+
+    return 1+maxFilho
+}
+
 const arvore: No = {
     valor: 1,
     filhos: [
@@ -42,5 +56,16 @@ const arvore: No = {
 
 console.log(somarArvore(arvore))
 console.log(contarNos(arvore))
+console.log(nivelMaisFundo(arvore))
+
+const arvore2: No = {
+    valor: 1,
+    filhos: [
+        { valor: 2, filhos: [{ valor: 4 }, { valor: 5 }] },
+        { valor: 3 }
+    ]
+}
+
+console.log(nivelMaisFundo(arvore2))
 
 export {}
