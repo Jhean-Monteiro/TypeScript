@@ -29,5 +29,25 @@ let produto2 = "teclado"
 estoque = adicionar(estoque, produto1, 20)
 estoque = adicionar(estoque, produto2, 10)
 estoque = remover(estoque, produto1, 5)
-console.log(estoque)
+
 console.log(total(estoque))
+
+let pipa = "pipa"
+estoque[pipa] = 10
+
+
+
+
+console.log(estoque)
+
+for (let i in estoque) {
+    console.log([i])
+    console.log(i)
+}
+
+let outro = {
+    ...estoque,
+    "pipa": 20,
+    'teste': 900
+}
+console.log(outro)
