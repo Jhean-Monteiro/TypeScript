@@ -1,94 +1,115 @@
-type ObterChaveFn = <O, K extends keyof O>(
-  objeto: O, chave: K
-) => O[K]
-
-const objetChave:ObterChaveFn = (objeto, chave) => {
-    return objeto[chave]
+type Dados = {
+  "userId": number,
+  "id": number,
+  "title": string,
+  "body": string
 }
 
-type Animal = {
-    idade: number,
-    vacinas: string[]
+
+async function buscarPost(id:number) {
+    try {
+        const resposta = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        if (!resposta.ok) {
+            console.log(resposta.status)
+            return null
+        }
+
+        const dados = await resposta.json() as Dados
+        return dados
+
+    } catch (erro) {
+        console.log(`erro: ${erro}`)
+    }
+    return null
 }
 
-const animal:Animal = {
-    idade: 20,
-    vacinas: ["1", "2"]
-} 
+
+(async () => {
+    const seila = await buscarPost(2)
+    console.log(seila)
+})();
 
 
-const vacinas = objetChave(animal, "vacinas")
-
-const idade = objetChave(animal, "idade")
-
-console.log(vacinas, idade)
-
+(async () => {
+    const seila = await buscarPost(3)
+    console.log(seila)
+})();
 
 
-type Valor = string | number 
+(async () => {
+    const resposta = await fetch("https://jsonplaceholder.typicode.com/posts/1")
+    const dados = await resposta.json() as Dados
+    console.log(dados)
+})();
 
-function retornaValor(valor:Valor):Valor {
-    return valor
+
+async function buscarPosts(id: number) {
+    try {
+        const resposta = await fetch("https://jsonplaceholder.typicode.com/posts/")
+        const teste = await resposta.json() as Dados[]
+        return teste
+    } catch (err) {
+        return null
+    }
 }
 
-function isString(valor: unknown): valor is string {
-    return typeof valor === "string"
+(async () => {
+    const ids = [1, 2, 3, 4, 5]
+    const posts = await Promise.all(ids.map(id => buscarPost(id)))
+    for (const post of posts) {
+        console.log(post?.title)
+    }
+})();
+
+
+
+// ============== // ============= // =========== // ============
+
+
+interface Perso {
+    nome: string
+    nivel: number
+    xp: number
+    vida: number
+    acao(alvo: Perso): string
 }
 
-function isNumber(valor: unknown): valor is number {
-    return (typeof valor === "number")
-}
+class Player implements Perso {
+    public xp: number = 0
+    constructor(public nome: string, public nivel: number, public vida: number) {
 
-const valor = retornaValor(2)
-const valor2 = retornaValor("kkkkkk")
-
-function a(valor: Valor) {
-
-    if (isNumber(valor)) {
-        console.log(valor+6)   
-    } else {
-        console.log(valor.split(""))
+    }
+    acao(alvo: Perso) {
+        alvo.vida -= (this.nivel*10) // (dano = nivel*10 por enquanto)
+        if (alvo.vida <= 0) {
+            return this.calcularXp(alvo)
+        }
+        return `${this.nome} está atacando ${alvo.nome}, que agora tem ${alvo.vida} de HP`
     }
 
-}
-a(valor)
-a(valor2)
-
-
-
-
-function unirObjetos<T, U>(obj1: T, obj2: U): T & U {
-  return Object.assign({}, obj1, obj2)
-}
-
-const obj1 = { chave1: "valor1" }
-const obj2 = { chave2: "valor2" }
-
-const uniao = unirObjetos(obj1, obj2)
-// tipo: { chave1: string } & { chave2: string }
-uniao.chave1 // ✅ string
-uniao.chave2 // ✅ string
-
-console.log(unirObjetos({chave: "kkkk"}, {chavinha: "sou a chave 2"}))
-
-
-
-
-
-function soma(...args: any[]): number {
-  // Se o primeiro argumento for um array, desmembra ele
-  const lista = args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
-
-  return lista.reduce((sum, value) => {
-    if (typeof value === 'number' && !isNaN(value)) {
-      return sum + value;
+    calcularXp(alvo: Perso) {
+        this.xp += alvo.nivel * 10
+        if (this.nivel*20 <= this.xp) {
+            this.nivel++
+            this.xp = 0
+            return `${this.nome} ganhou ${alvo.nivel*10} de XP e subiu para o nivel ${this.nivel}`
+        }
+        return `${this.nome} ganhou ${alvo.nivel*10} de XP`
     }
-    return sum;
-  }, 0);
 }
 
-console.log(soma([1, 2, 3, true, 4]))
-soma("1", "2", "3") // → 0 (nenhum é number)
-console.log(soma(1, 2))
+const marte = new Player("Marte", 1, 100)
+const sion = new Player("Sion", 10, 100)
 
-console.log("JheanMonteiro".split("M")[0])
+
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
+console.log(marte.acao(sion))
